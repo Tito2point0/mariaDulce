@@ -1,32 +1,30 @@
 import { useState, ChangeEvent, FormEvent } from "react";
+import emailjs from "emailjs-com";
 
 // Define an interface for your form data.
 interface FormData {
   name: string;
   email: string;
   message: string;
+  [key: string]: string; // Optional: allow additional keys if needed
 }
 
 const Contact = () => {
-  // Type the form state with the FormData interface.
   const [form, setForm] = useState<FormData>({
     name: "",
     email: "",
     message: "",
   });
-  // Type errors as a partial version of FormData (each key may or may not exist).
   const [errors, setErrors] = useState<Partial<FormData>>({});
   const [submitted, setSubmitted] = useState(false);
 
-  // Handle changes for both input and textarea elements.
-  const handleChange = (
-    e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
+  // Handle changes for input and textarea elements.
+  const handleChange = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [e.target.name]: e.target.value });
-    // Clear error on field change
     setErrors({ ...errors, [e.target.name]: "" });
   };
 
+  // Validate the form fields.
   const validate = (): Partial<FormData> => {
     const newErrors: Partial<FormData> = {};
     if (!form.name.trim()) newErrors.name = "Name is required";
@@ -37,13 +35,34 @@ const Contact = () => {
     return newErrors;
   };
 
-  const handleSubmit = (e: FormEvent) => {
+  // Handle form submission with EmailJS.
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     const validationErrors = validate();
     if (Object.keys(validationErrors).length === 0) {
-      // Here you would normally send the data to your server
-      console.log("Form submitted:", form);
-      setSubmitted(true);
+      try {
+        // Get credentials from environment variables using import.meta.env
+        const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
+        const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
+        const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
+
+        const response = await emailjs.send(
+          SERVICE_ID,
+          TEMPLATE_ID,
+          form,
+          PUBLIC_KEY
+        );
+
+        if (response.status === 200) {
+          console.log("Email sent successfully!");
+          setSubmitted(true);
+        } else {
+          alert("Something went wrong. Please try again.");
+        }
+      } catch (error) {
+        console.error("Error sending email:", error);
+        alert("Failed to send message. Please try again.");
+      }
     } else {
       setErrors(validationErrors);
     }
@@ -111,7 +130,7 @@ const Contact = () => {
               <textarea
                 id="message"
                 name="message"
-                rows={5} // Pass as a number, not a string.
+                rows={5}
                 value={form.message}
                 onChange={handleChange}
                 className="w-full border border-neutral-300 px-4 py-2 rounded focus:outline-none focus:ring-2 focus:ring-rose-500"
