@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FiYoutube, FiInstagram } from "react-icons/fi";
 // Import your CanvasRevealEffect component from its file
 import { CanvasRevealEffect } from "../components/ui/canvas-reveal-effect"; // adjust the path as needed
-import { cn } from "../../lib/utils";
+// ;
 
 export default function Home() {
   // Define your carousel images for the hero section (if needed)
