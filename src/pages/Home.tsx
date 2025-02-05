@@ -1,9 +1,14 @@
+"use client";
+
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FiYoutube, FiInstagram } from "react-icons/fi";
+// Import your CanvasRevealEffect component from its file
+import { CanvasRevealEffect } from "../components/ui/canvas-reveal-effect"; // adjust the path as needed
+import { cn } from "../../lib/utils";
 
 export default function Home() {
-  // Define your 8 carousel images
+  // Define your carousel images for the hero section (if needed)
   const carouselImages = [
     { src: "/02.JPG", alt: "Carousel Image 1", caption: "Image 1" },
     { src: "/33.JPG", alt: "Carousel Image 2", caption: "Image 2" },
@@ -15,41 +20,38 @@ export default function Home() {
     { src: "/433.JPG", alt: "Carousel Image 8", caption: "Image 8" },
   ];
 
-  const [current, setCurrent] = useState(0);
-
-  // Automatically cycle through the images every 5 seconds
+  const [currentHero, setCurrentHero] = useState(0);
   useEffect(() => {
     const timer = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % carouselImages.length);
+      setCurrentHero((prev) => (prev + 1) % carouselImages.length);
     }, 5000);
     return () => clearInterval(timer);
   }, [carouselImages.length]);
 
-  // Keep the existing guitar images for the lower section
+  // Define your guitar images for the "Recent Collaborations" cards
   const guitarImages = [
-    { src: '/guitar1.webp', title: 'Acoustic Sessions', genre: 'Folk / 2023' },
-    { src: '/guitar2.webp', title: 'Electric Dreams', genre: 'Rock / 2022' },
-    { src: '/guitar3.webp', title: 'Jazz Improvisations', genre: 'Jazz / 2021' },
+    { src: "/guitar1.webp", title: "Acoustic Sessions", genre: "Folk / 2023" },
+    { src: "/guitar2.webp", title: "Electric Dreams", genre: "Rock / 2022" },
+    { src: "/guitar3.webp", title: "Jazz Improvisations", genre: "Jazz / 2021" },
   ];
 
   return (
     <div className="min-h-screen bg-white text-neutral-900">
-      {/* Hero Section with Carousel */}
+      {/* (Optional) Hero Section */}
       <section className="relative h-screen flex items-center justify-center overflow-hidden bg-white">
         <AnimatePresence>
           <motion.div
-            key={current}
+            key={currentHero}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 1 }}
             className="absolute inset-0 flex items-center justify-center"
           >
-            {/* Wrap the image with a border and padding for a transitional feel */}
             <div className="border-4 border-gray-200 p-4">
               <img
-                src={carouselImages[current].src}
-                alt={carouselImages[current].alt}
+                src={carouselImages[currentHero].src}
+                alt={carouselImages[currentHero].alt}
                 className="w-full h-auto object-cover"
                 loading="lazy"
               />
@@ -58,7 +60,7 @@ export default function Home() {
         </AnimatePresence>
       </section>
 
-      {/* Featured Collaborations Section (left unchanged) */}
+      {/* Recent Collaborations Section */}
       <section id="work" className="py-24 bg-neutral-900/50">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
@@ -78,14 +80,32 @@ export default function Home() {
               <motion.div
                 key={index}
                 whileHover={{ scale: 1.02 }}
-                className="group relative overflow-hidden rounded-2xl aspect-square"
+                className="relative group overflow-hidden rounded-2xl aspect-square"
               >
+                {/* Background Image */}
                 <img
                   src={image.src}
                   alt={`Guitar project ${index + 1}`}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  className="absolute inset-0 w-full h-full object-cover"
                   loading="lazy"
                 />
+
+                {/* Canvas Reveal Effect Overlay */}
+                <div className="absolute inset-0 pointer-events-none">
+                  <CanvasRevealEffect
+                    // Ensure the containerClassName makes the effect container transparent:
+                    containerClassName="absolute inset-0 bg-transparent"
+                    animationSpeed={0.4}
+                    opacities={[
+                      0.3, 0.3, 0.3, 0.5, 0.5, 0.5, 0.8, 0.8, 0.8, 1,
+                    ]}
+                    colors={[[0, 255, 255]]}
+                    dotSize={3}
+                    showGradient={false}
+                  />
+                </div>
+
+                {/* Card Content Overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-neutral-900/90 via-transparent to-transparent p-6 flex flex-col justify-end">
                   <h3 className="text-xl font-bold mb-2">{image.title}</h3>
                   <p className="text-rose-400 text-sm">{image.genre}</p>
@@ -96,12 +116,24 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Social Links (unchanged) */}
+      {/* Social Links */}
       <div className="fixed left-6 bottom-6 hidden md:flex flex-col space-y-4">
-        <a href="#" className="hover:text-rose-400 transition-colors" aria-label="Instagram">
+        <a
+          href="https://www.instagram.com/dulmaho99/"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="hover:text-rose-400 transition-colors"
+          aria-label="Instagram"
+        >
+          {/* Instagram icon */}
           <FiInstagram size={24} />
         </a>
-        <a href="#" className="hover:text-rose-400 transition-colors" aria-label="YouTube">
+        <a
+          href="#"
+          className="hover:text-rose-400 transition-colors"
+          aria-label="YouTube"
+        >
+          {/* YouTube icon */}
           <FiYoutube size={24} />
         </a>
       </div>
