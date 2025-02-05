@@ -116,27 +116,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Social Links */}
-      <div className="fixed left-6 bottom-6 hidden md:flex flex-col space-y-4">
-        <a
-          href="https://www.instagram.com/dulmaho99/"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="hover:text-rose-400 transition-colors"
-          aria-label="Instagram"
-        >
-          {/* Instagram icon */}
-          <FiInstagram size={24} />
-        </a>
-        <a
-          href="#"
-          className="hover:text-rose-400 transition-colors"
-          aria-label="YouTube"
-        >
-          {/* YouTube icon */}
-          <FiYoutube size={24} />
-        </a>
-      </div>
+     
     </div>
   );
 }
