@@ -45,28 +45,39 @@ const Contact = () => {
         const SERVICE_ID = import.meta.env.VITE_EMAILJS_SERVICE_ID;
         const TEMPLATE_ID = import.meta.env.VITE_EMAILJS_TEMPLATE_ID;
         const PUBLIC_KEY = import.meta.env.VITE_EMAILJS_PUBLIC_KEY;
-
+  
+        // Debugging logs
+        console.log("VITE_EMAILJS_SERVICE_ID:", SERVICE_ID);
+        console.log("VITE_EMAILJS_TEMPLATE_ID:", TEMPLATE_ID);
+        console.log("VITE_EMAILJS_PUBLIC_KEY:", PUBLIC_KEY);
+  
+        // Ensure variables are not undefined
+        if (!SERVICE_ID || !TEMPLATE_ID || !PUBLIC_KEY) {
+          console.error("Missing EmailJS environment variables!");
+          return;
+        }
+  
         const response = await emailjs.send(
           SERVICE_ID,
           TEMPLATE_ID,
           form,
           PUBLIC_KEY
         );
-
+  
         if (response.status === 200) {
-          console.log("Email sent successfully!");
+          console.log("Email sent successfully!", response);
           setSubmitted(true);
         } else {
-          alert("Something went wrong. Please try again.");
+          console.error("Email failed to send:", response);
         }
       } catch (error) {
         console.error("Error sending email:", error);
-        alert("Failed to send message. Please try again.");
       }
     } else {
       setErrors(validationErrors);
     }
   };
+  
 
   return (
     <div className="min-h-screen bg-neutral-50 py-24 px-6 flex flex-col justify-center items-center">
