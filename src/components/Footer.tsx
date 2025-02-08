@@ -70,7 +70,7 @@ export default function Footer() {
 
         {/* Copyright Section */}
         <div className="mt-8 text-center text-sm text-neutral-500">
-          &copy; {new Date().getFullYear()} Your Name. All rights reserved.
+          &copy; {new Date().getFullYear()} Maria Hernandez. All rights reserved.
         </div>
       </div>
     </footer>
