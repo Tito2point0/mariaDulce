@@ -36,7 +36,7 @@ export default function Home() {
       </section>
 
       {/* Recent Collaborations Section */}
-      <section id="work" className="py-24 bg-neutral-900/50">
+      <section id="work" className="py-24 ">
         <div className="container mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

@@ -4,7 +4,7 @@ also change styling to it.
 -need to replace stock photos with actual photos
 -need to fix functionality on usage and responsiveness
 -fixing the menu button
--adding a home button
+-adding a home buttons
 -adding an about me page
 -hyperlink to contact us on email
 -fonts to waterfall
