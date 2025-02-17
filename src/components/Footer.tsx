@@ -1,4 +1,5 @@
 import { FiInstagram, FiFacebook, FiTwitter } from "react-icons/fi";
+import { Link } from "react-router-dom";
 
 export default function Footer() {
   return (
@@ -10,7 +11,12 @@ export default function Footer() {
             <h2 className="text-xl font-semibold mb-3">Contact</h2>
             <p className="text-sm text-neutral-400">
               Email:{" "}
-              <span className="text-white">dmariahernandezmc@gmail.com</span>
+              {/* <span className="text-white">dmariahernandezmc@gmail.com</span> */}
+              <Link
+                to="contact"
+                className="text-white hover:underline">
+                <span>dmariahernandezmc@gmail.com</span>
+                </Link>
             </p>
             <p className="text-sm text-neutral-400">
               Phone: <span className="text-white">+1 (555) 123-4567</span>
@@ -48,7 +54,7 @@ export default function Footer() {
 
           {/* Language & Country Selector */}
           <div>
-            <h2 className="text-xl font-semibold mb-3">Preferences</h2>
+            {/* <h2 className="text-xl font-semibold mb-3">Preferences</h2> */}
             <div className="flex justify-center md:justify-start space-x-4 text-sm">
               {/* Language Selector */}
               <div>
