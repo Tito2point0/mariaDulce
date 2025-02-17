@@ -20,7 +20,7 @@ export default function Gallery() {
   const [selectedImage, setSelectedImage] = useState<string | null>(null);
 
   return (
-    <div className="min-h-screen bg-gray-100 text-neutral-900 py-12 px-6">
+    <div className="min-h-screen bg-gray-100 text-neutral-900 py-12 px-6 pt-24 ">
       {/* Header with Framer Motion Animation */}
       <motion.h1
         className="text-center text-4xl font-bold text-gray-800 mb-12"
