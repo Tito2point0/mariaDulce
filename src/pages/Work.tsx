@@ -73,34 +73,38 @@ export default function Work() {
                 </p>
               </div>
             </div>
-            {/* Design Section */}
-            <div className="space-y-6">
-              <h3 className="text-xl font-semibold  text-neutral-900">
-                Diseño_
-              </h3>
-              <p className="text-neutral-700 leading-relaxed max-w-3xl">
-                {project.details.Diseño}
-              </p>
-            </div>
-            {/* Image Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              {project.images.map((img, idx) => (
-                <motion.div
-                  key={idx}
-                  whileHover={{ scale: 1.02 }}
-                  className="aspect-square bg-neutral-100 rounded-lg overflow-hidden"
-                >
-                  <img
-                    src={img}
-                    alt={`${project.title} ${idx + 1}`}
-                    className="w-full h-full object-cover"
-                    loading="lazy"
-                  />
-                </motion.div>
-              ))}
-            </div>
-          </motion.article>
+          
+          {/* Design Section */}
+<div className="p-8 bg-blue-50 border border-blue-400 rounded-xl shadow-md space-y-6 mb-8">  
+  <h3 className="headerBody text-2xl font-bold text-blue-700 uppercase">
+    Diseño_
+  </h3>
+  <p className="text-neutral-700 text-lg">
+    {project.details.Diseño}
+  </p>
+</div>
+
+{/* Image Grid */}
+<div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+  {project.images.map((img, idx) => (
+    <motion.div
+      key={idx}
+      whileHover={{ scale: 1.02 }}
+      className="aspect-square bg-neutral-100 rounded-lg overflow-hidden"
+    >
+      <img
+        src={img}
+        alt={`${project.title} ${idx + 1}`}
+        className="w-full h-full object-cover"
+        loading="lazy"
+      />
+    </motion.div>
+  ))}
+</div>
+</motion.article>
         ))}
+        
+        {/* Call to Action */}
 
         <div className="text-center mt-16">
           <Link
