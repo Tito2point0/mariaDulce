@@ -75,7 +75,7 @@ export default function Work() {
             </div>
             {/* Design Section */}
             <div className="space-y-6">
-              <h3 className="text-xl font-semibold text-neutral-900">
+              <h3 className="text-xl font-semibold  text-neutral-900">
                 Diseño_
               </h3>
               <p className="text-neutral-700 leading-relaxed max-w-3xl">

@@ -5,6 +5,7 @@ import Work from "./pages/Work";
 import Contact from "./pages/ContactUs";
 import Footer from "./components/Footer";
 import Gallery from "./pages/Gallery";
+
 // Dummy pages for navigation
 
 export default function App() {
